@@ -2,13 +2,13 @@
 
 **Vimfiles** are configuration files for the Vim editor. It includes editor preferences, colorscheme, font definitions, plugins, custom functions and more.
 
-**This project is my personal Vimfiles**. Feel free to send me suggestions / problems through the [issues page](https://github.com/lucascaton/vimfiles/issues/new) or you can contribute by sending improvements through the [Pull Requests page](https://github.com/lucascaton/vimfiles/pulls).
+**This project is my personal Vimfiles**. Feel free to send me suggestions / problems through the [issues page](https://github.com/fanxiong/vimfiles/issues/new) or you can contribute by sending improvements through the [Pull Requests page](https://github.com/fanxiong/vimfiles/pulls).
 
 ## How to use?
 
 Clone this repository into your home directory as `~/.vim` and then install the plugins. Such as:
 
-    git clone git://github.com/lucascaton/vimfiles.git ~/.vim
+    git clone git://github.com/fanxiong/vimfiles.git ~/.vim
     git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
     ln -s ~/.vim/vimrc ~/.vimrc
     vim +PluginInstall +qall
@@ -31,9 +31,9 @@ Install jshint, in order to review your JavaScript code:
 
 ## Fonts
 
-These are my favorite fonts:
+These are lot of favorite fonts:
 
-* Monaco *(my current one)*
+* Monaco *(current one)*
 * Anonymous Pro
 * Inconsolata-dz
 * Bitstream Vera Sans Mono
@@ -58,12 +58,7 @@ These are my favorite fonts:
 | [Tcomment](https://github.com/tomtom/tcomment_vim)                  | An extensible & universal comment vim-plugin                        |                                    |
 | [Vim Abolish](https://github.com/tpope/vim-abolish)                 | Easily search for, substitute, and abbreviate variants of a word    | [Vim Casts](http://goo.gl/CsfUJ6)  |
 | [Vim Airline](https://github.com/bling/vim-airline)                 | Lean & mean status / tabline                                        |                                    |
-| [Vim Coffee Script](https://github.com/kchmck/vim-coffee-script)    | CoffeeScript support for Vim                                        |                                    |
 | [Vim Easymotion](https://github.com/Lokaltog/vim-easymotion/)       | It provides a much simpler way to use some motions in Vim           |                                    |
-| [Vim Endwise](https://github.com/tpope/vim-endwise)                 | Wisely add "end" in ruby                                            |                                    |
-| [Vim Gitgutter](https://github.com/airblade/vim-gitgutter)          | Shows a git diff in the gutter (sign column)                        |                                    |
-| [Vim Rails](https://github.com/tpope/vim-rails)                     | Ruby on Rails power tools                                           |                                    |
-| [Vim Ruby Runner](https://github.com/henrik/vim-ruby-runner)        | Execute Ruby into an output buffer                                  |                                    |
 
 ## Vim in a GUI
 
@@ -83,14 +78,13 @@ Visit the following sites to learn more about Vim:
 * [Using Vim as a Complete Ruby on Rails IDE](http://biodegradablegeek.com/2007/12/using-vim-as-a-complete-ruby-on-rails-ide/)
 * [Why, oh WHY, do those #?@! nutheads use vi?](http://www.viemu.com/a-why-vi-vim.html)
 * [Byte of Vim](http://www.swaroopch.com/notes/Vim)
-
-## Other dotfiles
-
-You can find my dotfiles here: [lucascaton/dotfiles](https://github.com/lucascaton/dotfiles).
+* [Use Vim like an IDE](http://vim.wikia.com/wiki/Use_Vim_like_an_IDE) there are lots of plugin introduced by classified.
 
 ## Credits
 
-Created and maintained by **Lucas Caton**:
+**fanxiong**
+
+forked from **Lucas Caton**:
 
 * [Website](http://lucascaton.com.br)
 * [Blog](http://blog.lucascaton.com.br/)
