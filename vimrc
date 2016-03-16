@@ -18,14 +18,11 @@ call vundle#rc()
 Plugin 'gmarik/vundle'
 
 Plugin 'Lokaltog/vim-easymotion'
-Plugin 'airblade/vim-gitgutter'
 Plugin 'bling/vim-airline'
 Plugin 'chriskempson/base16-vim'
 Plugin 'danro/rename.vim'
 Plugin 'godlygeek/tabular'
 Plugin 'gorkunov/smartpairs.vim'
-Plugin 'henrik/vim-ruby-runner'
-Plugin 'kchmck/vim-coffee-script'
 Plugin 'kien/ctrlp.vim'
 Plugin 'lilydjwg/colorizer'
 Plugin 'msanders/snipmate.vim'
@@ -35,9 +32,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'tpope/vim-abolish'
-Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-rails'
 Plugin 'vim-scripts/matchit.zip'
 
 filetype plugin indent on
@@ -112,7 +107,6 @@ let g:airline#extensions#syntastic#enabled = 1
 " └───────────────────────────────────┘
 
 " Completion
-autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
 autocmd FileType python     set omnifunc=pythoncomplete#Complete
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType html       set omnifunc=htmlcomplete#CompleteTags
@@ -121,17 +115,14 @@ autocmd FileType xml        set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php        set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c          set omnifunc=ccomplete#Complete
 
-autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
-autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
-
 " Autoindent with two spaces, always expand tabs
-set tabstop=2
-set shiftwidth=2
-set expandtab
+set tabstop=4
+set shiftwidth=4
+"set expandtab
 
 " Folding settings
-set nofoldenable
+"set nofoldenable
+set foldenable
 
 set wildmode=list:longest " make cmdline tab completion similar to bash
 set wildmenu " enable ctrl-n and ctrl-p to scroll thru matches
@@ -208,14 +199,13 @@ let g:syntastic_style_error_symbol = '🤔'
 let g:syntastic_warning_symbol = '😱'
 let g:syntastic_style_warning_symbol = '💩'
 
-let g:syntastic_ruby_checkers = ['rubocop', 'mri']
 let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_coffee_checkers = ['coffeelint']
 let g:syntastic_html_tidy_exec = 'tidy5'
 let g:syntastic_html_tidy_ignore_errors = [" proprietary attribute \"ng-"]
-let g:syntastic_haml_checkers = ['haml_lint']
+"let g:syntastic_haml_checkers = ['haml_lint']
 let g:syntastic_mode_map = { 'mode': 'active',
-                           \ 'active_filetypes': ['ruby', 'javascript', 'coffee', 'haml'],
+                           \ 'active_filetypes': ['javascript'],
                            \ 'passive_filetypes': ['html'] }
 
 highlight link SyntasticErrorSign        SignColumn
@@ -245,7 +235,7 @@ set guioptions-=T
 " Syntax on
 syntax on
 
-set list listchars=tab:»·,trail:·
+"set list listchars=tab:»·,trail:·
 
 if has("gui_running")
   set lines=57
@@ -309,15 +299,6 @@ function InvertLines()
 :endfunction
 
 nnoremap <D-i> :call InvertLines()<cr>
-
-" Convert Ruby 1.8 to 1.9 Hash Syntax
-" http://robots.thoughtbot.com/convert-ruby-1-8-to-1-9-hash-syntax
-function ConvertRubyHashSyntax()
-  %s/:\([^ ]*\)\(\s*\)=>/\1:/g
-  ''
-:endfunction
-
-nnoremap <leader>h :call ConvertRubyHashSyntax()<cr>
 
 autocmd BufWritePre * :%s/\s\+$//e
 
@@ -402,13 +383,6 @@ function! UseDoubleQuotes()
 endfunction
 map <Leader>" :call UseDoubleQuotes()<CR>
 
-function! OpenGemfile()
-  if filereadable("Gemfile")
-    execute ":tab drop Gemfile"
-  end
-endfunction
-map <Leader>g :call OpenGemfile()<CR>
-
 function! OpenRoutes()
   if filereadable("config/routes.rb")
     execute ":tab drop config/routes.rb"
@@ -491,9 +465,6 @@ cmap w!! w !sudo tee % >/dev/null
 nnoremap Q @q
 vnoremap Q :norm @q<cr>
 
-" Adds a `puts` for code inspection (Ruby language)
-noremap <leader>p yypk^<Esc>iputs "#{'-' * `tput cols`.to_i}\n<Esc>$a: #{<Esc>Jx$a.inspect}\n#{'-' * `tput cols`.to_i}"<Esc>
-
 " ┌───────────────────────────────────┐
 " │     Shortcuts for Linux (Gvim)    │
 " └───────────────────────────────────┘
@@ -530,15 +501,6 @@ cab E e
 " │        Syntax Highlighting        │
 " └───────────────────────────────────┘
 
-au BufNewFile,BufRead *.thor       set filetype=ruby
-au BufNewFile,BufRead Guardfile    set filetype=ruby
-au BufNewFile,BufRead .pryrc       set filetype=ruby
-au BufNewFile,BufRead Vagrantfile  set filetype=ruby
-au BufNewFile,BufRead *.pp         set filetype=ruby
-au BufNewFile,BufRead *.prawn      set filetype=ruby
-au BufNewFile,BufRead Appraisals   set filetype=ruby
-au BufNewFile,BufRead Capfile      set filetype=ruby
-au BufNewFile,BufRead *.rabl       set filetype=ruby
 au BufNewFile,BufRead .psqlrc      set filetype=sql
 au BufNewFile,BufRead *.less       set filetype=css
 au BufNewFile,BufRead bash_profile set filetype=sh
@@ -546,11 +508,6 @@ au BufNewFile,BufRead *.hbs        set filetype=html
 au BufNewFile,BufRead *.yml.sample set filetype=yaml
 
 " Git hooks
-au BufNewFile,BufRead applypatch-msg     set filetype=ruby
-au BufNewFile,BufRead commit-msg         set filetype=ruby
-au BufNewFile,BufRead post-update        set filetype=ruby
-au BufNewFile,BufRead pre-applypatch     set filetype=ruby
-au BufNewFile,BufRead pre-commit         set filetype=ruby
-au BufNewFile,BufRead pre-push           set filetype=ruby
-au BufNewFile,BufRead pre-rebase         set filetype=ruby
-au BufNewFile,BufRead prepare-commit-msg set filetype=ruby
+"au BufNewFile,BufRead applypatch-msg     set filetype=ruby
+"au BufNewFile,BufRead commit-msg         set filetype=ruby
+"au BufNewFile,BufRead post-update        set filetype=ruby
