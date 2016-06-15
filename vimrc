@@ -17,6 +17,7 @@ call vundle#rc()
 
 Plugin 'gmarik/vundle'
 
+Plugin 'L9'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'bling/vim-airline'
 Plugin 'chriskempson/base16-vim'
@@ -34,6 +35,8 @@ Plugin 'tomtom/tcomment_vim'
 Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-fugitive'
 Plugin 'vim-scripts/matchit.zip'
+
+Bundle "pangloss/vim-javascript"
 
 filetype plugin indent on
 
@@ -123,6 +126,7 @@ set shiftwidth=4
 " Folding settings
 "set nofoldenable
 set foldenable
+set foldmethod=marker
 
 set wildmode=list:longest " make cmdline tab completion similar to bash
 set wildmenu " enable ctrl-n and ctrl-p to scroll thru matches
@@ -199,7 +203,7 @@ let g:syntastic_style_error_symbol = '🤔'
 let g:syntastic_warning_symbol = '😱'
 let g:syntastic_style_warning_symbol = '💩'
 
-let g:syntastic_javascript_checkers = ['jshint']
+"let g:syntastic_javascript_checkers = ['jshint']
 "let g:syntastic_coffee_checkers = ['coffeelint']
 let g:syntastic_html_tidy_exec = 'tidy5'
 let g:syntastic_html_tidy_ignore_errors = [" proprietary attribute \"ng-"]
@@ -270,8 +274,8 @@ function TrimWhiteSpace()
   ''
 :endfunction
 
-map  <leader>= :call TrimWhiteSpace()<CR>
-map! <leader>= :call TrimWhiteSpace()<CR>
+"map  <leader>= :call TrimWhiteSpace()<CR>
+"map! <leader>= :call TrimWhiteSpace()<CR>
 
 " Adds space between hash content and braces
 function AddsSpaceBetweenHashContentAndBraces()
@@ -383,31 +387,6 @@ function! UseDoubleQuotes()
 endfunction
 map <Leader>" :call UseDoubleQuotes()<CR>
 
-function! OpenRoutes()
-  if filereadable("config/routes.rb")
-    execute ":tab drop config/routes.rb"
-  end
-endfunction
-map <Leader>r :call OpenRoutes()<CR>
-
-function! OpenSpecHelper()
-  if filereadable("spec/spec_helper.rb")
-    execute ":tab drop spec/spec_helper.rb"
-  end
-endfunction
-map <Leader>s :call OpenSpecHelper()<CR>
-
-function! OpenFactoryFile()
-  if filereadable("spec/support/factories.rb")
-    execute ":tab drop spec/support/factories.rb"
-  else
-    if filereadable("spec/factories.rb")
-      execute ":tab drop spec/factories.rb"
-    end
-  end
-endfunction
-map <Leader>f :call OpenFactoryFile()<CR>
-
 " Search and replace selected text (http://stackoverflow.com/questions/676600/vim-search-and-replace-selected-text)
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
@@ -446,8 +425,9 @@ nnoremap <F12> :source ~/.vimrc
 nnoremap <C-L> :nohls<CR><C-L>
 
 " Improve 'n' command (for searches)
-nmap n nzz
-nmap N Nzz
+" 输入n/N时同时让焦点处放到屏幕中间
+"nmap n nzz
+"nmap N Nzz
 
 " Mappings to move lines: http://vim.wikia.com/wiki/Moving_lines_up_or_down
 nnoremap <D-j> :m .+1<CR>==
